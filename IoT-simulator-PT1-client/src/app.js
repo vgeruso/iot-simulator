@@ -1,10 +1,4 @@
 import net from 'net';
-import readline from 'readline';
-
-// const leitor = readline.createInterface({
-//   input: process.stdin,
-//   output: process.stdout,
-// });
 
 class Client {
   connect(address) {
