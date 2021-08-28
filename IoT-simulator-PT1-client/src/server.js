@@ -9,7 +9,7 @@ const leitor = readline.createInterface({
 });
 
 leitor.question(
-  'informe o endereço do servidor e a mensagem no formato - IP:PORTA => ',
+  'informe o endereço do servidor no formato - IP:PORTA => ',
   async (address) => {
     const info = address.split(':');
     const obj = {
@@ -19,13 +19,9 @@ leitor.question(
 
     const client = new Client();
     const con = client.connect(obj);
+
     await delay(100);
 
-    leitor.question('escreva uma mensagem: ', (msg) => {
-      con.write(msg);
-
-      leitor.close();
-      process.exit();
-    });
+    client.option(leitor, con);
   }
 );
