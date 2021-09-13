@@ -7,8 +7,9 @@ const server = net.createServer((con, err) => {
   console.info('-V- Cliente connected -V-\n');
   con.write('Conexão estabelecida');
 
-  con.on('data', (data) => {
+  con.on('data', async (data) => {
     console.log(`${data.toString()}\n`);
+    con.write(`${data.toString()}\n`);
   });
 
   con.on('end', () => {

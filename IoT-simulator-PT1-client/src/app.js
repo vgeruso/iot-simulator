@@ -1,4 +1,5 @@
 import net from 'net';
+import delay from 'delay';
 
 class Client {
   connect(address) {
@@ -14,10 +15,18 @@ class Client {
     return c;
   }
 
+  async writeMsg(leitor, con) {
+    con.on('data', (data) => {
+      console.log(`sua mensagem: ${data.toString()}`);
+    });
+    await delay(100);
+    this.option(leitor, con);
+  }
+
   sendMsg(leitor, con) {
     leitor.question('escreva uma mensagem: ', (msg) => {
       con.write(msg);
-      this.option(leitor, con);
+      this.writeMsg(leitor, con);
     });
   }
 
